@@ -15,26 +15,31 @@ class MainWin(QMainWindow):
 
         col = QColor(255, 255, 255)
 
+        # Параметры окна
         self.setWindowTitle('Графикс и ко')
         self.setGeometry(650, 200, 400, 400)
         self.setWindowFlags(Qt.FramelessWindowHint)
         self.setObjectName('MainWidget')
         self.setStyleSheet("#MainWidget {background-color: %s;}" % col.name())
-        #self.setStyleSheet("#MainWidget {background-image: url();}")
+        # self.setStyleSheet("#MainWidget {background-image: url(H:/7EJHMh5lBUU.jpg);}")
         self.old_pos = None
 
+        # Вставка кнопки настройки цвета фона в тулбар
         ChangeAction = QAction(QIcon('Картинки\Палитра.png'), 'Выбор цвета фона', self)
         ChangeAction.setShortcut('Ctrl+I')
         ChangeAction.triggered.connect(self.color)
 
+        # Вставка кнопки справки в тулбар
         Image = QAction(QIcon('Картинки\Справка.png'), 'О программе', self)
         Image.setShortcut('Ctrl+O')
         Image.triggered.connect(self.show_spr)
 
+        # Вставка кнопки выход в тулбар
         exitAction = QAction(QIcon('Картинки\Дверь 4.png'), 'Выход', self)
         exitAction.setShortcut('Ctrl+P')
         exitAction.triggered.connect(qApp.quit)
 
+        # Создание тулбара
         self.change = self.addToolBar('Панель инструментов')
         self.change.setObjectName('ToolBar')
         self.change.addAction(ChangeAction)
@@ -43,6 +48,7 @@ class MainWin(QMainWindow):
 
         self.show()
 
+    # Создатим функцию, отвечающую за палитру и изменение цвета фона окна
     def color(self):
 
         col = QColorDialog.getColor()
@@ -51,17 +57,17 @@ class MainWin(QMainWindow):
             self.setStyleSheet("#MainWidget { background-color:  %s;}" % col.name())
             self.change.setStyleSheet("#ToolBar { background-color:  #ffffff;}")
 
-
+    # Создатим функцию, открывающую окно справки
     def show_spr(self):
         self.spr = AboutPr()
         self.spr.show()
 
-    # нужна для перемещёния окна
+    # Создатим функцию, котороя сможет перемещать окно
     def mousePressEvent(self, event):
         if event.button() == Qt.LeftButton:
             self.old_pos = event.pos()
 
-    # вызывается всякий раз, когда мышь перемещается
+    # Создатим функциюб которая вызывается всякий раз, когда мышь перемещается
     def mouseMoveEvent(self, event):
         if not self.old_pos:
             return
@@ -70,20 +76,22 @@ class MainWin(QMainWindow):
         self.move(self.pos() + delta)
 
 
+# Класс нового справочного окна
 class AboutPr(QWidget):
     def __init__(self):
         super(AboutPr, self).__init__()
         self.initUI()
 
     def initUI(self):
-
         col = QColor(255, 255, 255)
 
+        # Параметры окна
         self.setWindowTitle('Справка')
         self.setGeometry(1058, 227, 450, 300)
         self.setObjectName('About')
         self.setStyleSheet("#About {background-color: %s;}" % col.name())
 
+        # Текст, который будет содержать справка
         self.plot = QLabel(self)
         self.plot.setText("Справка")
         self.plot.move(125, 15)
