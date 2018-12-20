@@ -45,6 +45,14 @@ class App(QMainWindow):
         exitAction.setShortcut('Ctrl+P')
         exitAction.triggered.connect(qApp.quit)
 
+        empty = QAction(QIcon('Картинки\Яйцо.png'), 'Пасхальное яйцо', self)
+
+        self.statusBar()
+
+        menubar = self.menuBar()
+        fileMenu = menubar.addMenu('& ')
+        fileMenu.addAction(empty)
+
         # Создание тулбара
         self.change = self.addToolBar('Панель инструментов')
         self.change.setObjectName('ToolBar')
