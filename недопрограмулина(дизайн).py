@@ -1,9 +1,13 @@
 import sys
 from PyQt5.QtWidgets import QAction, qApp, QColorDialog, QApplication, QMainWindow
-from PyQt5.QtWidgets import QWidget, QLabel
+from PyQt5.QtWidgets import QWidget, QLabel, QPushButton, QTabWidget, QVBoxLayout
+from PyQt5.QtWidgets import QLabel, QRadioButton, QInputDialog
 from PyQt5.QtGui import QIcon, QColor
-from PyQt5.QtCore import Qt
+from PyQt5.QtCore import Qt, pyqtSlot
+from PyQt5 import QtCore
 from qtpy import QtGui
+import pyqtgraph as pg
+import numpy as np
 
 
 class MainWin(QMainWindow):
